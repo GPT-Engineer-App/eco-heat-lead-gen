@@ -1,15 +1,44 @@
-// Update this page (the content is just a fallback if you fail and example)
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 
 const Index = () => {
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
-      {/* Update with components here - default to put new layout sections as separate components in the components folder, and import them here */}
-      <div>
-        <h1 className="text-3xl text-center">Your Blank Canvas</h1>
-        <p className="text-center">
-          Chat with the agent to start making edits.
-        </p>
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+      <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle className="text-3xl text-center">
+            Willkommen bei Wärmepumpen-Hersteller
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-center mb-4">
+            Entdecken Sie die besten Heizsysteme, die den neuen gesetzlichen
+            Anforderungen entsprechen.
+          </p>
+          <Separator className="my-4" />
+          <form className="space-y-4">
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" placeholder="Ihr Name" />
+            </div>
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="Ihre Email" />
+            </div>
+            <div>
+              <Label htmlFor="phone">Telefonnummer</Label>
+              <Input id="phone" type="tel" placeholder="Ihre Telefonnummer" />
+            </div>
+            <Button type="submit" className="w-full">
+              Jetzt informieren
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 };
