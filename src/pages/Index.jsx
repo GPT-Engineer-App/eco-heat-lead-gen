@@ -11,6 +11,7 @@ const Index = () => {
     email: "",
     phone: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -22,6 +23,7 @@ const Index = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("https://api.nocodemoney.com/send-email", {
         method: "POST",
@@ -36,6 +38,8 @@ const Index = () => {
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error response:", errorData);
         throw new Error("Network response was not ok");
       }
 
@@ -43,6 +47,8 @@ const Index = () => {
     } catch (error) {
       console.error("Error sending email:", error);
       alert("There was an error sending your email. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,8 +79,8 @@ const Index = () => {
               <Label htmlFor="phone">Telefonnummer</Label>
               <Input id="phone" type="tel" placeholder="Ihre Telefonnummer" value={formData.phone} onChange={handleChange} />
             </div>
-            <Button type="submit" className="w-full">
-              Jetzt informieren
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Sending..." : "Jetzt informieren"}
             </Button>
           </form>
         </CardContent>
